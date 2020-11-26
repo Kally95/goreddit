@@ -8,12 +8,6 @@ import (
 	"github.com/kally95/goreddit"
 )
 
-func NewThreadStore(db *sqlx.DB) *ThreadStore {
-	return &ThreadStore{
-		DB: db,
-	}
-}
-
 type ThreadStore struct {
 	*sqlx.DB
 }
