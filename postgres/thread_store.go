@@ -26,6 +26,14 @@ func (s *ThreadStore) Thread(id uuid.UUID) (goreddit.Thread, error) {
 	return t, nil
 }
 
+func (s *ThreadStore) Threads() ([]goreddit.Thread, error) {
+	var tt []goreddit.Thread
+	if err := s.Select(&tt, `SELECT * FROM threads`); err != nil {
+		return []goreddit.Thread{}, fmt.Errorf("error getting threads: %w", err)
+	}
+	return tt, nil
+}
+
 func (s *ThreadStore) ThreadStore() ([]goreddit.Thread, error) {
 	var tt []goreddit.Thread
 	if err := s.Select(&tt, `SELECT * FROM threads`); err != nil {

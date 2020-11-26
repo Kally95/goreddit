@@ -2,14 +2,12 @@ package goreddit
 
 import "github.com/google/uuid"
 
-// Thread = a collection of many posts.
 type Thread struct {
 	ID          uuid.UUID `db:"id"`
 	Title       string    `db:"title"`
 	Description string    `db:"description"`
 }
 
-// Post = what a thread is made up of
 type Post struct {
 	ID       uuid.UUID `db:"id"`
 	ThreadID uuid.UUID `db:"thread_id"`
@@ -47,4 +45,10 @@ type CommentStore interface {
 	CreateComment(t *Comment) error
 	UpdateComment(t *Comment) error
 	DeleteComment(id uuid.UUID) error
+}
+
+type Store interface {
+	ThreadStore
+	PostStore
+	CommentStore
 }
